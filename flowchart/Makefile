@@ -1,5 +1,5 @@
 #example
-DOCKER_COMPOSE_FILE := docker-compose.yml
+DOCKER_COMPOSE_FILE := srcs/docker-compose.yml
 
 # make build to build the dockerfiles
 #docker build -t custom-nginx ./nginx

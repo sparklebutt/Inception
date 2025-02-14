@@ -1,0 +1,44 @@
+version: '3.8' // can provide us with different tools and syntax
+services: // containers
+  nginx:
+    build:
+      context: .
+      dockerfile: path/Dockerfile-nginx // the docker file from which the image will be built
+    ports:
+      - "80:80"
+    networks:
+      - inceptionnet
+  wordpress:
+    build:
+      context: .
+      dockerfile: path/Dockerfile-wordpress // the docker file from which the image will be built
+    volumes:
+      - wordpress-data:/var/www/html
+    networks:
+      - inceptionnet
+  mariadb:
+    build:
+      context: .
+      dockerfile: path/Dockerfile-mariadb // the docker file from which the image will be built
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppassword//(none?)
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - inceptionnet
+
+/*volumes are mounted into containers, allowing data to persist even if
+*containers are recreated.
+*Docker volumes are stored in a specific directory on the host filesystem managed by Docker::
+*/var/lib/docker/volumes, but a path can be specified
+*/
+volumes:
+  wordpress-data:
+  db-data:
+
+// define diy networks , this allows containers to communicate with eachother
+networks:
+  webinception:
