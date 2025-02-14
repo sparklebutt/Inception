@@ -273,8 +273,8 @@
         <mxCell id="QDZcUWIWedcfiBCgo4B5-36" value="docker network" style="shape=or;whiteSpace=wrap;html=1;direction=south;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="330" y="255" width="80" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="QDZcUWIWedcfiBCgo4B5-206" value="Db volume&amp;nbsp; (- db-data:/var/lib/mysql)" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="142.5" y="345" width="145" height="150" as="geometry" />
+        <mxCell id="QDZcUWIWedcfiBCgo4B5-206" value="Db volume&amp;nbsp; (- db-data:/var/lib/mysql)" style="shape=datastore;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=default;fillColor=light-dark(#99CCFF,#EDEDED);" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="142.5" y="320" width="145" height="150" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
