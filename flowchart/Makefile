@@ -29,4 +29,13 @@ test:
 logs:
     docker-compose -f $(DOCKER_COMPOSE_FILE) logs -f
 
+#clean dangeling images and unused volumes
+clean:
+    docker system prune -f
+    docker volume prune -f
+
+#View logs for a specific service
+logs-nginx:
+    docker-compose --env-file -f $(DOCKER_COMPOSE_FILE) logs -f nginx
+
 .PHONY: build up down restart test logs
