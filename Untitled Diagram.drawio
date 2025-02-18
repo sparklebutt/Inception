@@ -4,6 +4,17 @@
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-65" value="network ERR" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#f8cecc;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;strokeColor=#b85450;" vertex="1" collapsed="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1060" y="-1400" width="110" height="30" as="geometry">
+            <mxRectangle x="1040" y="-1404" width="655" height="231" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-69" value="" style="shape=image;html=1;verticalLabelPosition=bottom;verticalAlign=top;imageAspect=1;aspect=fixed;image=img/clipart/Gear_128x128.png" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-65">
+          <mxGeometry y="26" width="655" height="61" as="geometry" />
+        </mxCell>
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-66" value="After trying to apk docker, package couldnt be found even after updating packages.&lt;div&gt;i attempted to manually put in a main and community repository assuming they where simply missing.&lt;/div&gt;&lt;div&gt;Trying to update packages a fetch was attempted followed by an error (try again later and 4 unavailable).&lt;/div&gt;&lt;div&gt;Ping to google with error, online advice suggested to configure DNS, resolv.conf was empty so i added googles public DNS, no positive results yielded.&lt;/div&gt;&lt;div&gt;Manual networking configuration was required, since there was no interfaces file for network, ip link to check for interface, created a interfaces file, added DHCP (dynamic host config protocol). /ect/init.d/networking restart (restarting networking script inside init.d).&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-65">
+          <mxGeometry y="87" width="655" height="144" as="geometry" />
+        </mxCell>
         <mxCell id="VuhiG2OMYxqmFF7oU0-H-0" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#CCFF99;dashed=1;gradientColor=#CCFF99;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="-250" y="-890" width="930" height="450" as="geometry" />
         </mxCell>
@@ -233,7 +244,7 @@
             <mxGeometry x="500" y="-724" width="60" height="40" as="geometry" />
           </mxCell>
         </UserObject>
-        <mxCell id="VuhiG2OMYxqmFF7oU0-H-3" value="requirements /" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;endWidth=28;endSize=8.16;width=18;fillColor=#FFCC99;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-3" value="requirements /" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;endWidth=28;endSize=8.16;width=18;fillColor=#63FF9C;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="-0.1077" y="2" width="50" height="50" relative="1" as="geometry">
             <mxPoint x="490" y="-480" as="sourcePoint" />
             <mxPoint x="520" y="-400" as="targetPoint" />
@@ -249,44 +260,49 @@
         <mxCell id="VuhiG2OMYxqmFF7oU0-H-5" value="nginx.conf" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="1010" y="-427.5" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="VuhiG2OMYxqmFF7oU0-H-6" value="vm installs" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="200" y="-1500" width="750" height="354" as="geometry" />
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-6" value="vm installs" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="205" y="-1490" width="750" height="380" as="geometry">
+            <mxRectangle x="420" y="-1270" width="100" height="30" as="alternateBounds" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="VuhiG2OMYxqmFF7oU0-H-7" value="sudo apk update" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
-          <mxGeometry y="30" width="750" height="30" as="geometry" />
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-50" value="When ur first initial loginhost is root, we do not need to use sudo" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
+          <mxGeometry y="30" width="750" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-7" value="sudo apk update (updates the packages list , does not update system)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
+          <mxGeometry y="56" width="750" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-51" value="Had to do manual network config" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
+          <mxGeometry y="86" width="750" height="26" as="geometry" />
         </mxCell>
         <mxCell id="VuhiG2OMYxqmFF7oU0-H-8" value="sudo apk add docker" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
-          <mxGeometry y="60" width="750" height="30" as="geometry" />
+          <mxGeometry y="112" width="750" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="VuhiG2OMYxqmFF7oU0-H-9" value="sudo rc-update add docker boot" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
-          <mxGeometry y="90" width="750" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="VuhiG2OMYxqmFF7oU0-H-11" value="sudo service docker start" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
-          <mxGeometry y="120" width="750" height="26" as="geometry" />
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-9" value="sudo rc-update add docker boot (if we want to have docker up and running our services at boot, can be done later)&lt;div&gt;.manual service docker start/stop/restart&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
+          <mxGeometry y="142" width="750" height="30" as="geometry" />
         </mxCell>
         <mxCell id="VuhiG2OMYxqmFF7oU0-H-12" value="new step sudo apk add pyhton3&amp;nbsp;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
-          <mxGeometry y="146" width="750" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="VuhiG2OMYxqmFF7oU0-H-13" value="sudo apk add py3-pip" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
           <mxGeometry y="172" width="750" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="VuhiG2OMYxqmFF7oU0-H-14" value="sudo pip3 install docker-compose" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-13" value="sudo apk add py3-pip" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
           <mxGeometry y="198" width="750" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="VuhiG2OMYxqmFF7oU0-H-15" value="new step sudo apk update" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-14" value="sudo pip3 install docker-compose" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
           <mxGeometry y="224" width="750" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="VuhiG2OMYxqmFF7oU0-H-22" value="sudo apk add openssl" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-15" value="new step sudo apk update" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
           <mxGeometry y="250" width="750" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="VuhiG2OMYxqmFF7oU0-H-23" value="navigate to nginx/tools in vm terminal --&amp;gt; openssl genpkey -algorithim RSA -out nginx.key" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-22" value="sudo apk add openssl" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
           <mxGeometry y="276" width="750" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="VuhiG2OMYxqmFF7oU0-H-24" value="openssl req -new -key nginx.key -out nginx.csr" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-23" value="navigate to nginx/tools in vm terminal --&amp;gt; openssl genpkey -algorithim RSA -out nginx.key" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
           <mxGeometry y="302" width="750" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="VuhiG2OMYxqmFF7oU0-H-25" value="openssl x509 -req -days 365 -in nginx.csr -signkey nginx.key -out nginx.crt" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-24" value="openssl req -new -key nginx.key -out nginx.csr" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
           <mxGeometry y="328" width="750" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-25" value="openssl x509 -req -days 365 -in nginx.csr -signkey nginx.key -out nginx.crt" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-6">
+          <mxGeometry y="354" width="750" height="26" as="geometry" />
         </mxCell>
         <mxCell id="VuhiG2OMYxqmFF7oU0-H-26" value="alpine is a better choice because its containers are smaller, this allows for faster builds and transfer times.&lt;div&gt;its more lightweight and simple.&lt;/div&gt;" style="shape=loopLimit;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="-190" y="-1480" width="100" height="190" as="geometry" />
@@ -340,6 +356,42 @@
         </mxCell>
         <mxCell id="VuhiG2OMYxqmFF7oU0-H-40" value="" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="730" y="640" width="410" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-41" value="setting up vm (virtual box)" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="70" y="-1860" width="560" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-42" value="VB boasts good performance , is open source and is a commonly used tool" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-41">
+          <mxGeometry y="30" width="560" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-43" value="Create new , type linux, version other 64x (because i will be using alpine)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-41">
+          <mxGeometry y="60" width="560" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-44" value="download .iso&amp;nbsp;&lt;span style=&quot;background-color: transparent;&quot;&gt;penultimate stable&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;version of Alpine (not latest but previouse stable version 3.20)&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-41">
+          <mxGeometry y="90" width="560" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-45" value="attatch the .iso to input windows ISO box. This will allow the vm to run using alpine" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-41">
+          <mxGeometry y="120" width="560" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-47" value="free -m to see available ram, df -h to see available disk space" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-41">
+          <mxGeometry y="146" width="560" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-46" value="allocating 3gb (3072mb) ram, 2gb is suggested but i can afford more, 2 cpu min for multitasking" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-41">
+          <mxGeometry y="172" width="560" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-48" value="recommended minimum based on what will go on virtual disk 20gb, i have enough to give 30gb" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-41">
+          <mxGeometry y="198" width="560" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-49" value="do not tick pre-allocate Full size, this way we have a dynamically allocated virtual hard disk" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="VuhiG2OMYxqmFF7oU0-H-41">
+          <mxGeometry y="224" width="560" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-70" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="VuhiG2OMYxqmFF7oU0-H-51" target="VuhiG2OMYxqmFF7oU0-H-65">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="710" y="-1230" as="sourcePoint" />
+            <mxPoint x="760" y="-1280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VuhiG2OMYxqmFF7oU0-H-11" value="sudo service docker start" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="210" y="-1100" width="750" height="26" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
