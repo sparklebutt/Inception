@@ -74,6 +74,8 @@ volumes:
   wordpress-data:
   db-data:
 
-// define diy networks , this allows containers to communicate with eachother
+// define diy networks , this allows containers to communicate with eachother brdiging creates
+// private internal netwrok on the docker host
 networks:
   inceptionnet:
+	driver: bridge
