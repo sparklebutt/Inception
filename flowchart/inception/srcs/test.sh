@@ -28,5 +28,39 @@ if [ $? -ne 0 ]; then
     echo "Test Failed: Nginx configuration is incorrect or not being used"
     exit 1
 fi
-echo "All tests passed successfully."
+echo "All nginx tests passed successfully."
 
+# Test if WordPress home page is up and running
+curl -s http://nginx:80 | grep 'Welcome to WordPress'
+if [ $? -ne 0 ]; then
+    echo "Test Failed: WordPress home page not served correctly"
+    exit 1
+fi
+
+# Test if WordPress login page is accessible
+curl -s http://nginx:80/wp-login.php | grep 'Log In'
+if [ $? -ne 0 ]; then
+    echo "Test Failed: WordPress login page not accessible"
+    exit 1
+fi
+
+# Test database connection via WordPress
+docker-compose -f srcs/docker-compose.yml exec wordpress wp db check --path=/var/www/html
+if [ $? -ne 0 ]; then
+    echo "Test Failed: WordPress cannot connect to the database"
+    exit 1
+fi
+
+# Test if PHP-FPM is running
+docker-compose -f srcs/docker-compose.yml exec wordpress ps aux | grep php-fpm | grep -v grep
+if [ $? -ne 0 ]; then
+    echo "Test Failed: PHP-FPM is not running"
+    exit 1
+fi
+
+# Test if WordPress directory has correct permissions
+docker-compose -f srcs/docker-compose.yml exec wordpress ls -ld /var/www/html | grep 'www-data'
+if [ $? -ne 0 ]; then
+    echo "Test Failed: WordPress directory permissions are incorrect"
+    exit 1
+fi

@@ -55,16 +55,14 @@ services:
     ports:
       - "${WORDPRESS_PORT}:${WORDPRESS_PORT}" # Expose port 9000 for PHP-FPM
     environment: # defined in .env availabe to container during execution
-      #- DOMAIN_NAME=${DOMAIN_NAME}
-      #- CRT_PATH=${CRT_PATH}
-      #- KEY_PATH=${KEY_PATH}
-      #- INSECURE_PORT=${INSECURE_PORT}
-      #- SECURE_PORT=${SECURE_PORT}
-      BOSS_PASS=${BOSS_PASS}
-      WORDPRESS_PORT=${WORDPRESS_PORT}
-    volumes: # chose one over other
-      - ${WORDPRESS_VOLUME_PATH}:/var/www/html # this is called maping, it helps keep persitance across container restarts.
-      #- wordpress-data:/var/www/html
+      WORDPRESS_DB_HOST: ${DB_HOST}
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      BOSS_PASS: ${BOSS_PASS}
+      WORDPRESS_PORT: ${WORDPRESS_PORT}
+    volumes:
+      - ${WORDPRESS_VOLUME_PATH}:/var/www/html # this is called maping,it helps keep persitance across container restarts.
     networks:
       - inceptionnet
     restart: always
