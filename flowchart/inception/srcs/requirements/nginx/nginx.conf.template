@@ -1,0 +1,80 @@
+
+user nginx;
+worker_processes auto;
+
+error_log /var/log/nginx/error.log warn;
+
+pid /var/run/nginx.pid;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log /var/log/nginx/access.log main;
+	sendfile on;
+    keepalive_timeout 65;
+    include /etc/nginx/conf.d/*.conf;
+
+	server {
+    	listen ${INSECURE_PORT};
+    	server_name ${DOMAIN_NAME};
+    	return 301 https://$host$request_uri;
+	}
+	
+    server {
+        listen ${SECURE_PORT} ssl;
+        server_name ${DOMAIN_NAME};
+		
+		ssl_protocols TLSv1.2 TLSv1.3;
+
+        ssl_certificate ${CRT_PATH};
+        ssl_certificate_key ${KEY_PATH};
+
+		root /var/www/html;
+        index index.php index.html index.htm;
+        
+		#this trys first to see if there is a direct path, this allow for quick serving without involving php proccessing
+		location / {
+        try_files $uri $uri/ /index.php?$args;
+    	}
+
+    	location ~ \.php$ {
+        	try_files $uri =404;
+       		fastcgi_pass wordpress:${WORDPRESS_PORT};
+		   	fastcgi_split_path_info ^(.+\.php)(/.+)$; 
+        	fastcgi_index index.php;
+        	include fastcgi_params;
+        	fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        	fastcgi_param PATH_INFO $fastcgi_path_info;
+    	}
+
+    	error_log /var/log/nginx/error.log;
+    	access_log /var/log/nginx/access.log;
+
+		
+    }
+}
+#replace evrything you can with whats in .env file, turn this into a entry script.sh with permissions
+
+#location ~ \.php$ {
+#    include fastcgi_params;
+#    fastcgi_pass wordpress:9000;
+#    fastcgi_split_path_info ^(.+\.php)(/.+)$; 
+#    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+#    fastcgi_param PATH_INFO $fastcgi_path_info;
+#}
+
+#		location / {
+#            proxy_pass http://wordpress:${WORDPRESS_PORT};
+#            proxy_set_header Host $host;
+#            proxy_set_header X-Real-IP $remote_addr;
+#            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#            proxy_set_header X-Forwarded-Proto $scheme;
+#        }

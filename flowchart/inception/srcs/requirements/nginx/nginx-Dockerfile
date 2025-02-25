@@ -6,44 +6,55 @@ FROM ${BASE_VERSION}
 # Define build arguments
 ARG CRT_PATH
 ARG KEY_PATH
+ARG SECURE_PORT
 
 # Set environment variables test this to see if redunant
-ENV CRT_PATH=${CRT_PATH}
-ENV KEY_PATH=${KEY_PATH}
+# ENV CRT_PATH=${CRT_PATH}
+# ENV KEY_PATH=${KEY_PATH}
 
 # Install Nginx and OpenSSL no cache ensurfes latest packages
-RUN apk add --no-cache nginx openssl
+# envsubst (via gettext) so i can use .env vars in conf files
+RUN apk add --no-cache nginx openssl gettext 
 
-#this must be explored
-# Add non-root user and set permissions
-#RUN adduser -D -g 'www' www && chown -R www:www /var/lib/nginx
-#USER www
+# Add non-root user and set permissions if the user does not already exist
+RUN id -u nginx &>/dev/null || adduser -D -g 'www' nginx && chown -R nginx:nginx /var/lib/nginx
 
-# Create directories for SSL certificates
-RUN mkdir -p /etc/ssl/private /etc/ssl/certs
-#do this below instead of above
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout /etc/ssl/private/nginx-selfsigned.key \
-    -out /etc/ssl/certs/nginx-selfsigned.crt \
-    -subj "/CN=localhost"
-#alternativly store things in dessired directory
-RUN mkdir -p /etc/nginx/tools/inhere && \
+# Copy custom Nginx configuration template file
+COPY nginx.conf.template /etc/nginx/nginx.conf.template
+
+# Copy entrypoint script to dynamically create the config
+COPY tools/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Create directories for default SSL certificates 
+RUN mkdir -p /etc/ssl/private /etc/ssl/certs && \
+	mkdir -p $(dirname ${CRT_PATH}) $(dirname ${KEY_PATHS})&& \
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout /etc/nginx/tools/inhere/nginx-selfsigned.key \
-    -out /etc/nginx/tools/inhere/nginx-selfsigned.crt \
-    -subj "/CN=localhost"
-
-RUN mkdir -p $(dirname ${CRT_PATH}) $(dirname ${KEY_PATHS})&& \
-    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout ${KEY_PATH}\
+    -keyout ${KEY_PATH} \
     -out ${CRT_PATH} \
     -subj "/CN=localhost"
 
 # Copy custom Nginx configuration file and overwite default file
-COPY nginx.conf /etc/nginx/nginx.conf
+# no longer needed if using template
+# COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose port 443 for HTTPS
-EXPOSE 443
+EXPOSE ${SECURE_PORT}
+
+# Use entrypoint script to run Nginx
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Run Nginx in the foreground this is Pid 1
-CMD ["nginx", "-g", "daemon off;"]
+#CMD ["nginx", "-g", "daemon off;"]
+
+##do this below instead of above
+#RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+#-keyout /etc/ssl/private/nginx-selfsigned.key \
+#-out /etc/ssl/certs/nginx-selfsigned.crt \
+#-subj "/CN=localhost"
+#alternativly store things in dessired directory
+#RUN mkdir -p /etc/nginx/tools/inhere && \
+#openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+#-keyout /etc/nginx/tools/inhere/nginx-selfsigned.key \
+#-out /etc/nginx/tools/inhere/nginx-selfsigned.crt \
+#-subj "/CN=localhost"

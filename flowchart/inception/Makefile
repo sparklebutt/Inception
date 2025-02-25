@@ -26,8 +26,6 @@ restart:
 #make test to run tests if we have any, we should
 test:
     docker-compose -f $(DOCKER_COMPOSE_FILE) run --rm test
-#assumin that we have a application that runs a web server returning "hello, World!"
-    curl -s http://localhost | grep "Hello, World!"
 
 #make logs to view logs of the running service in real time
 logs:
@@ -35,11 +33,25 @@ logs:
 
 #clean dangeling images and unused volumes
 clean:
-    docker system prune -f
-    docker volume prune -f
+    docker system prune -f --volumes
+   # docker volume prune -f --volumes
 
-#View logs for a specific service
+#View logs for a specific service (--env-file )
 logs-nginx:
-    docker-compose --env-file -f $(DOCKER_COMPOSE_FILE) logs -f nginx
+    docker-compose -f $(DOCKER_COMPOSE_FILE) logs -f nginx
+help:
+	@echo "Usage: make [target]"
+	@echo ""
+	@echo "Targets:"
+	@echo "  all       - Start Docker containers"
+	@echo "  up        - Start Docker containers"
+	@echo "  down      - Stop Docker containers"
+	@echo "  clean     - Remove Docker containers"
+	@echo "  ps        - Show Docker containers status"
+	@echo "  logs      - Show Docker containers logs"
+	@echo "  help      - Show this help message"
 
 .PHONY: build up down restart test logs
+
+#@echo "  fclean    - Remove Docker containers, networks, volumes, and images"
+#@echo "  re        - Restart Docker containers"
