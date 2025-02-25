@@ -1,0 +1,20 @@
+DOCKER-COMPOSE
+
+We get services up and running .
+We build them :
+  . eg ngnix : define the service 
+  . context: path to dockerfile
+  . dockerfile : name of the dockerfile from which the image will be built
+  . args: arguments passed from .env that will be avialble during the docker build image stage
+  . image: name of the image
+  . ports: ports we want to connect
+  . environment : defined in the .env , these are available during execution
+  . volumes: mounts the specified paths as volumes in the container 
+      . ${WORDPRESS_VOLUME_PATH}:/var/www/html, this is called mapping 
+        it helps keep persitance across container restarts.
+      . ./nginx-logs:/var/log/nginx  Map logs to a host directory for easyer log access 
+  . networks: connects service to this network
+  . restart policy
+  . depends on: create a dependency to ensure this dependecy service starts before
+    service we are building
+    . healthcheck: checks to see service is up and running  
