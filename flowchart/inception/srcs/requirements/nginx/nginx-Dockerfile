@@ -34,10 +34,6 @@ RUN mkdir -p /etc/ssl/private /etc/ssl/certs && \
     -out ${CRT_PATH} \
     -subj "/CN=localhost"
 
-# Copy custom Nginx configuration file and overwite default file
-# no longer needed if using template
-# COPY nginx.conf /etc/nginx/nginx.conf
-
 # Expose port 443 for HTTPS
 EXPOSE ${SECURE_PORT}
 

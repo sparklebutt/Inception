@@ -9,20 +9,18 @@ RUN apk add --no-cache mariadb mariadb-client
 # Create necessary directories and set permissions
 RUN mkdir -p /run/mysqld && \
     mkdir -p /var/lib/mysql && \
-    chown -R mysql:mysql /var/lib/mysql /run/mysqld
+    mkdir -p /var/log/mysql && \
+    chown -R mysql:mysql /var/lib/mysql /run/mysqld /var/log/mysql
 
 # Initialize the database
 RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
 # Copy configuration file
-COPY mariadb.conf.template /etc/my.cnf.d/mariadb.conf
+COPY mariadb.cnf.template /etc/mysql/my.cnf
 
 # Copy and set up the entrypoint script
 COPY tools/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-
-# Expose the MariaDB port
-EXPOSE ${MARIADB_PORT}
 
 # Use the entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]

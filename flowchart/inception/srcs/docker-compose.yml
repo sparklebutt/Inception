@@ -1,7 +1,7 @@
-# can provide us with different tools and syntax
 version: '3.8'
-# services are the containers
+# is the test .sh executable and fix
 services:
+# NGINX
   nginx:
     build:
       context: ./src/requirements/nginx
@@ -22,13 +22,15 @@ services:
       - SECURE_PORT=${SECURE_PORT}
       - WORDPRESS_PORT=${WORDPRESS_PORT}
     volumes:
-      - .${CRT_PATH}:${CRT_PATH}
-      - .${KEY_PATH}:${KEY_PATH}
+      - ${VOLUME_PATH_GENERIC}nginx-selfsigned.crt:${CRT_PATH}
+      - ${VOLUME_PATH_GENERIC}nginx-selfsigned.key:${KEY_PATH}
+#      - .${CRT_PATH}:${CRT_PATH}
+#      - .${KEY_PATH}:${KEY_PATH}
       - ${WORDPRESS_VOLUME_PATH}:/var/www/html
-      - ./nginx-logs:/var/log/nginx  
+      - ${NGINX_VOLUME_PATH}nginx-logs:/var/log/nginx 
     networks:
       - inceptionnet
-    restart: always
+    restart: unless-stopped
     depends_on:
       - wordpress
     healthcheck:
@@ -38,7 +40,7 @@ services:
       retries: 3
 
 
-#WORDPRESS STUFF
+# WORDPRESS
   wordpress:
     build:
       context: ./src/requirements/wordpress
@@ -47,8 +49,8 @@ services:
         BASE_VERSION: ${BASE_VERSION}
         WORDPRESS_PORT: ${WORDPRESS_PORT}
     image: wordpress
-    ports:
-      - "${WORDPRESS_PORT}:${WORDPRESS_PORT}"
+    #ports:
+    #  - "${WORDPRESS_PORT}:${WORDPRESS_PORT}"
     environment:
       WORDPRESS_DB_HOST: ${DB_HOST}
       WORDPRESS_DB_USER: ${MYSQL_USER}
@@ -60,7 +62,7 @@ services:
       - ${WORDPRESS_VOLUME_PATH}:/var/www/html
     networks:
       - inceptionnet
-    restart: always
+    restart: unless-stopped
     depends_on:
       - mariadb
     healthcheck:
@@ -68,7 +70,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-
+# MARIADB
   mariadb:
     build:
       context: ./src/requirements/wordpress
@@ -77,46 +79,35 @@ services:
         BASE_VERSION: ${BASE_VERSION}
         WORDPRESS_PORT: ${WORDPRESS_PORT}
     image: mariadb
-    ports: "${MARIADB_PORT} : ${MARIADB_PORT}"
+    #ports: "${MARIADB_PORT} : ${MARIADB_PORT}"
     environment: 
       MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE=${MYSQL_DATABASE}
       MYSQL_USER=${MYSQL_USER}
       MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      MARIADB_PORT=${MARIADB_PORT}
     volumes:
-    # can use either one ?
       - ${DB_VOLUME_PATH}:/var/lib/mysql
-    #  - db-data:/var/lib/mysql
     networks:
       - inceptionnet
-
-    restart: always
+    restart: unless-stopped #for now
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-u", "root", "--password=${MYSQL_ROOT_PASSWORD}"]
       interval: 30s
       timeout: 10s
       retries: 3
-  #test contianer so i dont have to install curl seperatley
   test:
     image: curlimages/curl:latest
     volumes:
-      - ./test.sh:/test.sh  # Mount the test script
+      - ./test.sh:/test.sh
     entrypoint: ["sh", "/test.sh"]
-    depends_on:
-      - nginx
+   # depends_on:
+   #   - nginx
     networks:
       - inceptionnet
-# volumes are mounted into containers, allowing data to persist even if
-# containers are recreated.
-# Docker volumes are stored in a specific directory on the host filesystem managed by Docker::
-# /var/lib/docker/volumes, but a path can be specified
-
 volumes:
   wordpress-data:
   db-data:
-
-# define diy networks , this allows containers to communicate with eachother brdiging creates
-# private internal netwrok on the docker host
 networks:
   inceptionnet:
     driver: bridge

@@ -1,57 +1,68 @@
-#example
 DOCKER_COMPOSE_FILE := srcs/docker-compose.yml
 
-# make build to build the dockerfiles
-#docker build -t custom-nginx ./nginx
-#docker build -t custom-wordpress ./wordpress
-#docker build -t custom-mariadb ./mariadb
+# Build the Docker images defined in the Dockerfile
 build:
     docker-compose -f $(DOCKER_COMPOSE_FILE) build
 
-#make up start service define in docker-compse.yml
+# Start services defined in docker-compose.yml
 up:
     docker-compose -f $(DOCKER_COMPOSE_FILE) up -d
 
-#make down stops and remove services //cleanup
+# Stop and remove services, cleanup
 down:
     docker-compose -f $(DOCKER_COMPOSE_FILE) down
-# show status of contianers running managed by docker compose (only running)
-# --all flag will show stopped containers as well
+
+# Show status of containers managed by docker-compose (only running)
 ps:
     docker-compose -f $(DOCKER_COMPOSE_FILE) ps
 
-#make restart for a quick application of new configs or recovery
+# Restart all services
 restart:
     docker-compose -f $(DOCKER_COMPOSE_FILE) restart
-#make test to run tests if we have any, we should
+
+# Run tests if any are defined
 test:
     docker-compose -f $(DOCKER_COMPOSE_FILE) run --rm test
 
-#make logs to view logs of the running service in real time
+# View logs of the running services in real time
 logs:
     docker-compose -f $(DOCKER_COMPOSE_FILE) logs -f
 
-#clean dangeling images and unused volumes
+# Clean dangling images and unused volumes
 clean:
     docker system prune -f --volumes
-   # docker volume prune -f --volumes
 
-#View logs for a specific service (--env-file )
+# View logs for the Nginx service in real time
 logs-nginx:
     docker-compose -f $(DOCKER_COMPOSE_FILE) logs -f nginx
+
+
+# Full clean: includes `clean` and removes images and stopped containers
+fclean: clean
+    @echo "Removing all stopped containers..."
+    docker container prune -f
+    @echo "Removing all Docker images..."
+    docker image prune -a -f
+
+# Default target, builds and starts services, and shows status
+all: build up ps
+
+# Help message
 help:
-	@echo "Usage: make [target]"
-	@echo ""
-	@echo "Targets:"
-	@echo "  all       - Start Docker containers"
-	@echo "  up        - Start Docker containers"
-	@echo "  down      - Stop Docker containers"
-	@echo "  clean     - Remove Docker containers"
-	@echo "  ps        - Show Docker containers status"
-	@echo "  logs      - Show Docker containers logs"
-	@echo "  help      - Show this help message"
+    @echo "Usage: make [target]"
+    @echo ""
+    @echo "Targets:"
+    @echo "  build     - Build Docker images"
+    @echo "  up        - Start Docker containers"
+    @echo "  down      - Stop Docker containers"
+    @echo "  ps        - Show Docker containers status"
+    @echo "  restart   - Restart Docker containers"
+    @echo "  test      - Run tests (if defined)"
+    @echo "  logs      - Show Docker containers logs"
+    @echo "  clean     - Remove dangling images and unused volumes"
+    @echo "  logs-nginx - Show logs for Nginx service"
+	 @echo "  fclean    - Full clean: remove all stopped containers and images"
+    @echo "  all       - Build, start, and show status of Docker containers"
+    @echo "  help      - Show this help message"
 
-.PHONY: build up down restart test logs
-
-#@echo "  fclean    - Remove Docker containers, networks, volumes, and images"
-#@echo "  re        - Restart Docker containers"
+.PHONY: build up down ps restart test logs clean logs-nginx all help

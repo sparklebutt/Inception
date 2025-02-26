@@ -1,26 +1,62 @@
-ARG BASE_VERSION
+#ARG BASE_VERSION
 #==alpine:3.20.6
 # Use the official Alpine base image
-FROM ${BASE_VERSION}
+#FROM ${BASE_VERSION}
 
-RUN apk add --no-cache WordPress php php-fpm mariadb-client
-# 2 users, 1 is admin but not that name, the other user i guess?
-#RUN adduser -D -G www-data -s /bin/sh boss && \
-#	adduser -D -G www-data -s /bin/sh guest
+#RUN apk add --no-cache WordPress php php-fpm mariadb-client
 
-#ARG BOSS_PASS 
-# Set the password for boss using environment variable
-#RUN echo "boss:${BOSS_PASS}" | chpasswd
-
-COPY wordpress.conf.template /etc/wordpress/wordpress.conf.template
+#COPY wordpress.conf.template /etc/wordpress/wordpress.conf.template
 
 # Install WP-CLI for WordPress command-line management
+#RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+#    chmod +x wp-cli.phar && \
+#    mv wp-cli.phar /usr/local/bin/wp
+	
+#COPY tools/entrypoint.sh /entrypoint.sh
+#RUN chmod +x /entrypoint.sh
+
+#ENTRYPOINT ["/entrypoint.sh"]
+
+###new below
+ARG BASE_VERSION
+FROM ${BASE_VERSION}
+
+# Install required packages with specific versions if necessary
+RUN apk add --no-cache \
+    wordpress \
+    php \
+    php-fpm \
+    php-mysqli \
+    php-mbstring \
+    php-json \
+    php-gd \
+    php-xml \
+    php-zip \
+    mariadb-client
+
+# Copy PHP-FPM configuration template
+COPY php-fpm.conf.template /etc/php/php-fpm.d/www.conf
+
+# Create necessary directories
+RUN mkdir -p /run/php
+
+# Create www-data user
+RUN adduser -S www-data -G www-data
+
+# Create a symlink for PHP
+#RUN ln -s /usr/bin/php /usr/bin/php81
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Install WP-CLI
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
     chmod +x wp-cli.phar && \
     mv wp-cli.phar /usr/local/bin/wp
-	
+
+# Copy entrypoint script
 COPY tools/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-EXPOSE ${WORDPRESS_PORT}
+# Set entrypoint
 ENTRYPOINT ["/entrypoint.sh"]

@@ -43,25 +43,8 @@ else
   echo "WordPress is already installed."
 fi
 
-
 # Ensure directory permissions
 chown -R www-data:www-data /var/www/html
 
 # Start PHP-FPM in the foreground
 php-fpm -F
-
-
-#if ! $(wp core is-installed --path="/var/www/html"); then
-#	echo "Wordpress being installed"
-  # Download WordPress core files
-#  wp core download --path=/var/www/html
-
-  # Create WordPress configuration file
-#  wp config create --dbname=${MYSQL_DATABASE} --dbuser=${MYSQL_USER} --dbpass=${MYSQL_PASSWORD} --dbhost=${DB_HOST} --path=/var/www/html
-
-  # Install WordPress
-#  wp core install --url="http://localhost" --title="WordPress Site" --admin_user=${ADMIN_UNAME} --admin_password=${BOSS_PASS} --admin_email="admin@example.com" --skip-email --path=/var/www/html
-  
-  # Create additional user
-#  wp user create ${GUEST_UNAME} user@example.com --user_pass=${GUEST_PASS} --role=editor --path=/var/www/html
-#fi

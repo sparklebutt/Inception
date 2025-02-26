@@ -15,9 +15,6 @@ nginx -g "daemon off;"
 #    exit 1
 #fi
 
-# Substitute environment variables in the template and create final config
-#envsubst < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
-
 # Create necessary directories and set permissions
 #mkdir -p /var/www/html
 #chown -R nginx:nginx /var/www/html
