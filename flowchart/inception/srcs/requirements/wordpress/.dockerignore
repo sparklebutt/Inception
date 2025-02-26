@@ -1,6 +1,5 @@
-
 # Ignore specific Dockerfile
-nginx-Dockerfile
+wordpress-Dockerfile
 
 # Ignore node_modules directory (if applicable)
 node_modules/
@@ -15,19 +14,32 @@ logs
 *.pyo
 *.pyd
 
-# Ignore directories
-dist/
-build/
-#*.out
-# Ignore git directory
-.git
-.gitignore
-
 # Ignore temporary files
 *.tmp
 tmp/
 *.swp
 *.bak
+
+# Ignore directories
+dist/
+build/
+*.out
+
+# Ignore git directory
+.git
+
+# Ignore vendor directory if using Composer
+vendor/
+
+# Ignore WordPress core files and uploads
+wp-admin/
+wp-includes/
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+
+# Ignore custom wp-config file
+wp-config.php
 
 # Ignore any editor-specific files
 .vscode/
@@ -36,6 +48,3 @@ tmp/
 # Ignore OS-specific files
 .DS_Store
 Thumbs.db
-
-# Ignore .env file located two directories up
-../../.env
