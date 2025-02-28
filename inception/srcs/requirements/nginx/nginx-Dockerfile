@@ -7,14 +7,15 @@ FROM ${BASE_VERSION}
 ARG CRT_PATH
 ARG KEY_PATH
 ARG SECURE_PORT
-
+ARG CRT
+ARG KEY
 # Set environment variables test this to see if redunant
 # ENV CRT_PATH=${CRT_PATH}
 # ENV KEY_PATH=${KEY_PATH}
 
 # Install Nginx and OpenSSL no cache ensurfes latest packages
 # envsubst (via gettext) so i can use .env vars in conf files
-RUN apk add --no-cache nginx openssl gettext 
+RUN apk update && apk add --no-cache nginx openssl gettext 
 
 # Add non-root user and set permissions if the user does not already exist
 RUN id -u nginx &>/dev/null || adduser -D -g 'www' nginx && chown -R nginx:nginx /var/lib/nginx
@@ -28,10 +29,10 @@ RUN chmod +x /entrypoint.sh
 
 # Create directories for default SSL certificates 
 RUN mkdir -p /etc/ssl/private /etc/ssl/certs && \
-	mkdir -p $(dirname ${CRT_PATH}) $(dirname ${KEY_PATHS})&& \
+	mkdir -p $(dirname ${CRT_PATH}${CRT}) $(dirname ${KEY_PATH}${KEY})&& \
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout ${KEY_PATH} \
-    -out ${CRT_PATH} \
+    -keyout ${KEY_PATH}${KEY} \
+    -out ${CRT_PATH}${CRT} \
     -subj "/CN=localhost"
 
 # Expose port 443 for HTTPS

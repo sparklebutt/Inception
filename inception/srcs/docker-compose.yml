@@ -4,13 +4,15 @@ services:
 # NGINX
   nginx:
     build:
-      context: ./src/requirements/nginx
-      dockerfile: Dockerfile-nginx
+      context: ./srcs/requirements/nginx
+      dockerfile: nginx-Dockerfile
       args:
         BASE_VERSION: ${BASE_VERSION}
         CRT_PATH: ${CRT_PATH}
         KEY_PATH: ${KEY_PATH}
         SECURE_PORT: ${SECURE_PORT}
+        CRT: ${CRT}
+        KEY: ${KEY}
     image: nginx
     ports:
       - "${SECURE_PORT}:${SECURE_PORT}"
@@ -43,7 +45,7 @@ services:
 # WORDPRESS
   wordpress:
     build:
-      context: ./src/requirements/wordpress
+      context: ./srcs/requirements/wordpress
       dockerfile: wordpress-Dockerfile
       args:
         BASE_VERSION: ${BASE_VERSION}
@@ -52,12 +54,12 @@ services:
     #ports:
     #  - "${WORDPRESS_PORT}:${WORDPRESS_PORT}"
     environment:
-      WORDPRESS_DB_HOST: ${DB_HOST}
-      WORDPRESS_DB_USER: ${MYSQL_USER}
-      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
-      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
-      BOSS_PASS: ${BOSS_PASS}
-      WORDPRESS_PORT: ${WORDPRESS_PORT}
+      - WORDPRESS_DB_HOST=${DB_HOST}
+      - WORDPRESS_DB_USER=${MYSQL_USER}
+      - WORDPRESS_DB_PASSWORD=${MYSQL_PASSWORD}
+      - WORDPRESS_DB_NAME=${MYSQL_DATABASE}
+      - BOSS_PASS: ${BOSS_PASS}
+      - WORDPRESS_PORT=${WORDPRESS_PORT}
     volumes:
       - ${WORDPRESS_VOLUME_PATH}:/var/www/html
     networks:
@@ -73,7 +75,7 @@ services:
 # MARIADB
   mariadb:
     build:
-      context: ./src/requirements/wordpress
+      context: ./srcs/requirements/mariadb
       dockerfile: mariadb-Dockerfile
       args:
         BASE_VERSION: ${BASE_VERSION}
@@ -81,11 +83,11 @@ services:
     image: mariadb
     #ports: "${MARIADB_PORT} : ${MARIADB_PORT}"
     environment: 
-      MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE=${MYSQL_DATABASE}
-      MYSQL_USER=${MYSQL_USER}
-      MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      MARIADB_PORT=${MARIADB_PORT}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MARIADB_PORT=${MARIADB_PORT}
     volumes:
       - ${DB_VOLUME_PATH}:/var/lib/mysql
     networks:

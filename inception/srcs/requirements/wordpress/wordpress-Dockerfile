@@ -22,9 +22,10 @@ ARG BASE_VERSION
 FROM ${BASE_VERSION}
 
 # Install required packages with specific versions if necessary
-RUN apk add --no-cache \
-    wordpress \
-    php \
+# removed     wordpress may need to add packages. added curl
+RUN apk update && apk add --no-cache \
+    curl \
+	php \
     php-fpm \
     php-mysqli \
     php-mbstring \

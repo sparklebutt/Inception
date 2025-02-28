@@ -4,7 +4,7 @@ ARG BASE_VERSION
 FROM ${BASE_VERSION}
 
 # Install MariaDB and client
-RUN apk add --no-cache mariadb mariadb-client
+RUN apk update && apk add --no-cache mariadb mariadb-client
 
 # Create necessary directories and set permissions
 RUN mkdir -p /run/mysqld && \
