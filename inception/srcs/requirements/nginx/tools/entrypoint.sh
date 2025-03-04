@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Substitute environment variables in the template and create final config
-envsubst < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
+envsubst < etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
 
 # Start Nginx
 nginx -g "daemon off;"

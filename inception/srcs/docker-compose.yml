@@ -9,10 +9,10 @@ services:
       args:
         BASE_VERSION: ${BASE_VERSION}
         CRT_PATH: ${CRT_PATH}
-        KEY_PATH: ${KEY_PATH}
-        SECURE_PORT: ${SECURE_PORT}
-        CRT: ${CRT}
-        KEY: ${KEY}
+        #KEY_PATH: ${KEY_PATH}
+        #SECURE_PORT: ${SECURE_PORT}
+        #CRT: ${CRT}
+        #KEY: ${KEY}
     image: nginx
     ports:
       - "${SECURE_PORT}:${SECURE_PORT}"
@@ -23,16 +23,20 @@ services:
       - INSECURE_PORT=${INSECURE_PORT}
       - SECURE_PORT=${SECURE_PORT}
       - WORDPRESS_PORT=${WORDPRESS_PORT}
+
+      #- CRT=${CRT}
+      #- KEY=${KEY}
+
     volumes:
-      - ${VOLUME_PATH_GENERIC}nginx-selfsigned.crt:${CRT_PATH}
-      - ${VOLUME_PATH_GENERIC}nginx-selfsigned.key:${KEY_PATH}
+      #- ${VOLUME_PATH_GENERIC}nginx-selfsigned.crt:${CRT_PATH}
+      #- ${VOLUME_PATH_GENERIC}nginx-selfsigned.key:${KEY_PATH}
 #      - .${CRT_PATH}:${CRT_PATH}
 #      - .${KEY_PATH}:${KEY_PATH}
       - ${WORDPRESS_VOLUME_PATH}:/var/www/html
       - ${NGINX_VOLUME_PATH}nginx-logs:/var/log/nginx 
     networks:
       - inceptionnet
-    restart: unless-stopped
+    #restart: unless-stopped
     depends_on:
       - wordpress
     healthcheck:
@@ -58,7 +62,7 @@ services:
       - WORDPRESS_DB_USER=${MYSQL_USER}
       - WORDPRESS_DB_PASSWORD=${MYSQL_PASSWORD}
       - WORDPRESS_DB_NAME=${MYSQL_DATABASE}
-      - BOSS_PASS: ${BOSS_PASS}
+      - BOSS_PASS=${BOSS_PASS}
       - WORDPRESS_PORT=${WORDPRESS_PORT}
     volumes:
       - ${WORDPRESS_VOLUME_PATH}:/var/www/html

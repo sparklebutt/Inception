@@ -4,11 +4,11 @@ ARG BASE_VERSION
 FROM ${BASE_VERSION}
 
 # Define build arguments
-ARG CRT_PATH
-ARG KEY_PATH
+#ARG CRT_PATH
+#ARG KEY_PATH
 ARG SECURE_PORT
-ARG CRT
-ARG KEY
+#ARG CRT
+#ARG KEY
 # Set environment variables test this to see if redunant
 # ENV CRT_PATH=${CRT_PATH}
 # ENV KEY_PATH=${KEY_PATH}
@@ -20,21 +20,28 @@ RUN apk update && apk add --no-cache nginx openssl gettext
 # Add non-root user and set permissions if the user does not already exist
 RUN id -u nginx &>/dev/null || adduser -D -g 'www' nginx && chown -R nginx:nginx /var/lib/nginx
 
-# Copy custom Nginx configuration template file
-COPY nginx.conf.template /etc/nginx/nginx.conf.template
 
 # Copy entrypoint script to dynamically create the config
 COPY tools/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Create directories for default SSL certificates 
-RUN mkdir -p /etc/ssl/private /etc/ssl/certs && \
-	mkdir -p $(dirname ${CRT_PATH}${CRT}) $(dirname ${KEY_PATH}${KEY})&& \
-    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout ${KEY_PATH}${KEY} \
-    -out ${CRT_PATH}${CRT} \
+RUN mkdir -p /run/nginx /etc/nginx/ssl && \
+	mkdir -p /etc/nginx/ssl && \
+	touch /etc/nginx/nginx.conf.template && \
+	chmod -R 755 /etc/ssl
+
+RUN  openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout  /etc/nginx/ssl/selfsigned.key\
+    -out /etc/nginx/ssl/selfsigned.crt \
     -subj "/CN=localhost"
 
+RUN chmod 600 /etc/nginx/ssl/selfsigned.crt
+RUN chmod 600 /etc/nginx/ssl/selfsigned.key
+# Copy custom Nginx configuration template file
+COPY conf/nginx.conf.template /etc/nginx/nginx.conf.template
+RUN chmod +x /etc/nginx/nginx.conf.template
+# do i need for conf also?
 # Expose port 443 for HTTPS
 EXPOSE ${SECURE_PORT}
 
