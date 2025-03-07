@@ -38,4 +38,4 @@ build/
 Thumbs.db
 
 # Ignore .env file located two directories up
-../../.env
+#../../.env
