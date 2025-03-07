@@ -1,14 +1,14 @@
-version: '3.8'
+# version: '3.8' oboslete for debian 
 # is the test .sh executable and fix
 services:
 # NGINX
   nginx:
     build:
-      context: ./srcs/requirements/nginx
+      context: ./requirements/nginx
       dockerfile: nginx-Dockerfile
       args:
         BASE_VERSION: ${BASE_VERSION}
-        CRT_PATH: ${CRT_PATH}
+        #CRT_PATH: ${CRT_PATH}
         #KEY_PATH: ${KEY_PATH}
         #SECURE_PORT: ${SECURE_PORT}
         #CRT: ${CRT}
@@ -18,8 +18,8 @@ services:
       - "${SECURE_PORT}:${SECURE_PORT}"
     environment:
       - DOMAIN_NAME=${DOMAIN_NAME}
-      - CRT_PATH=${CRT_PATH}
-      - KEY_PATH=${KEY_PATH}
+      #- CRT_PATH=${CRT_PATH}
+      #- KEY_PATH=${KEY_PATH}
       - INSECURE_PORT=${INSECURE_PORT}
       - SECURE_PORT=${SECURE_PORT}
       - WORDPRESS_PORT=${WORDPRESS_PORT}
@@ -49,7 +49,7 @@ services:
 # WORDPRESS
   wordpress:
     build:
-      context: ./srcs/requirements/wordpress
+      context: ./requirements/wordpress
       dockerfile: wordpress-Dockerfile
       args:
         BASE_VERSION: ${BASE_VERSION}
@@ -79,7 +79,7 @@ services:
 # MARIADB
   mariadb:
     build:
-      context: ./srcs/requirements/mariadb
+      context: ./requirements/mariadb
       dockerfile: mariadb-Dockerfile
       args:
         BASE_VERSION: ${BASE_VERSION}
