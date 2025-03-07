@@ -3,7 +3,7 @@ DOCKER_COMPOSE_FILE := srcs/docker-compose.yml
 
 # Target to create the custom network
 start-network:
-    @docker network inspect custom-network >/dev/null 2>&1 || docker network create inceptionnet
+	@docker network inspect custom-network >/dev/null 2>&1 || docker network create inceptionnet
 # Build the Docker images defined in the Dockerfile
 build:
 	docker-compose -f $(DOCKER_COMPOSE_FILE) build
@@ -49,7 +49,7 @@ fclean: clean
 	docker image prune -a -f
 # Clear logs
 clear-logs:
-    docker exec -it $(docker ps -q -f "name=nginx") sh -c 'cd /var/log/nginx && 
+	docker exec -it $(docker ps -q -f "name=nginx") sh -c 'cd /var/log/nginx && 
 
 # Default target, builds and starts services, and shows status
 all: build up ps
