@@ -10,12 +10,6 @@
 #fi
 #must make a html file for that test
 
-# Test if SSL/TLS certificate is being served correctly
-curl -k -s --head https://nginx:443 | grep '200 OK'
-if [ $? -ne 0 ]; then
-    echo "Test Failed: SSL/TLS certificate not served correctly"
-    exit 1
-fi
 
 # Test if HTTP is redirected to HTTPS
 curl -s -o /dev/null -w '%{http_code}' http://nginx:80 | grep '301'
@@ -64,5 +58,12 @@ fi
 docker-compose -f srcs/docker-compose.yml exec wordpress ls -ld /var/www/html | grep 'www-data'
 if [ $? -ne 0 ]; then
     echo "Test Failed: WordPress directory permissions are incorrect"
+    exit 1
+fi
+
+# Test if SSL/TLS certificate is being served correctly
+curl -k -s --head https://nginx:443 | grep '200 OK'
+if [ $? -ne 0 ]; then
+    echo "Test Failed: SSL/TLS certificate not served correctly"
     exit 1
 fi
