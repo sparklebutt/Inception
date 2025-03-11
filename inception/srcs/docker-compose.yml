@@ -3,6 +3,9 @@
 services:
 # NGINX
   nginx:
+    env_file:
+      - ./.env
+    image: nginx
     build:
       context: ./requirements/nginx
       dockerfile: nginx-Dockerfile
@@ -13,7 +16,6 @@ services:
         #SECURE_PORT: ${SECURE_PORT}
         #CRT: ${CRT}
         #KEY: ${KEY}
-    image: nginx
     ports:
       - "${SECURE_PORT}:${SECURE_PORT}"
     environment:
@@ -48,13 +50,15 @@ services:
 
 # WORDPRESS
   wordpress:
+    env_file:
+      - ./.env
+    image: wordpress
     build:
       context: ./requirements/wordpress
       dockerfile: wordpress-Dockerfile
       args:
         BASE_VERSION: ${BASE_VERSION}
         WORDPRESS_PORT: ${WORDPRESS_PORT}
-    image: wordpress
     #ports:
     #  - "${WORDPRESS_PORT}:${WORDPRESS_PORT}"
     environment:
@@ -78,13 +82,15 @@ services:
       retries: 3
 # MARIADB
   mariadb:
+    env_file:
+      - ./.env
+    image: mariadb
     build:
       context: ./requirements/mariadb
       dockerfile: mariadb-Dockerfile
       args:
         BASE_VERSION: ${BASE_VERSION}
         WORDPRESS_PORT: ${WORDPRESS_PORT}
-    image: mariadb
     #ports: "${MARIADB_PORT} : ${MARIADB_PORT}"
     environment: 
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
