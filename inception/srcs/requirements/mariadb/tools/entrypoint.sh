@@ -17,10 +17,10 @@ if ! chown -R mysql:mysql /var/lib/mysql /run/mysqld /var/log/mysql; then
 fi
 
 # Start the MariaDB service
-if ! mysqld_safe &; then
-  echo "Error: Failed to start MariaDB service"
-  exit 1
-fi
+#if ! mysqld_safe &; then
+#  echo "Error: Failed to start MariaDB service"
+#  exit 1
+#fi
 
 # Wait for MariaDB to be ready
 until mysqladmin ping --silent; do
@@ -29,4 +29,4 @@ until mysqladmin ping --silent; do
 done
 
 # Keep the MariaDB server running in the foreground exce?
-mysqld_safe
+exec mysqld_safe
