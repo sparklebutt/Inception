@@ -2,14 +2,14 @@ DOCKER_COMPOSE_FILE := srcs/docker-compose.yml
 
 
 # Target to create the custom network
-start-network:
-	@docker network inspect custom-network >/dev/null 2>&1 || docker network create inceptionnet
+#start-network:
+#	@docker network inspect custom-network >/dev/null 2>&1 || docker network create inceptionnet
 # Build the Docker images defined in the Dockerfile
 build:
 	docker-compose -f $(DOCKER_COMPOSE_FILE) build
 
 # Start services defined in docker-compose.yml added as fail safe to start network
-up: start-network
+up: #start-network
 	docker-compose -f $(DOCKER_COMPOSE_FILE) up -d
 
 # Stop and remove services, cleanup
