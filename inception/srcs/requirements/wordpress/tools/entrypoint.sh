@@ -4,7 +4,7 @@
 set -e  # Exit immediately if a command exits with a non-zero status
 
 # Wait for the database to be ready
-until mysqladmin ping -h ${DB_HOST} --silent; do
+until mysqladmin ping -h "${DB_HOST}" --silent; do
   echo "Waiting for database to be ready..."
   sleep 2
 done
@@ -13,7 +13,7 @@ done
 # directly checks if WordPress is installed by querying the database, providing a precise and reliable status.
 # creating the users here allows for dynamic user creation , eg differenmt system have different users.
 
-if ! $(wp core is-installed --path="/var/www/html"); then
+if ! wp core is-installed --path="/var/www/html"; then
   echo "WordPress is being installed"
 
   # Download WordPress core files
@@ -23,7 +23,7 @@ if ! $(wp core is-installed --path="/var/www/html"); then
   fi
 
   # Create WordPress configuration file
-  if ! wp config create --dbname=${MYSQL_DATABASE} --dbuser=${MYSQL_USER} --dbpass=${MYSQL_PASSWORD} --dbhost=${DB_HOST} --path=/var/www/html; then
+  if ! wp config create --dbname="${MYSQL_DATABASE}" --dbuser="${MYSQL_USER}" --dbpass=${MYSQL_PASSWORD} --dbhost=${DB_HOST} --path=/var/www/html; then
     echo "Error creating wp-config.php"
     exit 1
   fi
@@ -35,7 +35,7 @@ if ! $(wp core is-installed --path="/var/www/html"); then
   fi
 
   # Create additional user
-  if ! wp user create ${GUEST_UNAME} user@example.com --user_pass=${GUEST_PASS} --role=editor --path=/var/www/html; then
+  if ! wp user create "${GUEST_UNAME}" user@example.com --user_pass="${GUEST_PASS}" --role=editor --path=/var/www/html; then
     echo "Error creating additional user"
     exit 1
   fi
@@ -47,4 +47,4 @@ fi
 chown -R www-data:www-data /var/www/html
 
 # Start PHP-FPM in the foreground
-php-fpm -F
+exec php-fpm -F

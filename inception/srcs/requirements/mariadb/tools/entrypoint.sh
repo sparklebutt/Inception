@@ -10,11 +10,6 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 fi
 
 chown -R mysql:mysql /var/lib/mysql /run/mysqld /var/log/mysql
-# Ensure directory permissions
-#if ! chown -R mysql:mysql /var/lib/mysql /run/mysqld /var/log/mysql; then
-#  echo "Error: Failed to set directory permissions"
-#  exit 1
-#fi
 
 mysqld_safe &
 # Wait for MariaDB to be ready
