@@ -17,6 +17,7 @@ services:
         #SECURE_PORT: ${SECURE_PORT}
         #CRT: ${CRT}
         #KEY: ${KEY}
+    entrypoint: ["/entrypoint.sh"] ##?????
     ports:
       - "${SECURE_PORT}:${SECURE_PORT}"
     environment:
@@ -61,6 +62,7 @@ services:
       args:
         BASE_VERSION: ${BASE_VERSION}
         WORDPRESS_PORT: ${WORDPRESS_PORT}
+    entrypoint: ["/entrypoint.sh"] ##?????
     #ports:
     #  - "${WORDPRESS_PORT}:${WORDPRESS_PORT}"
     environment:
@@ -95,6 +97,7 @@ services:
         BASE_VERSION: ${BASE_VERSION}
         WORDPRESS_PORT: ${WORDPRESS_PORT}
     #ports: "${MARIADB_PORT} : ${MARIADB_PORT}"
+    entrypoint: ["/entrypoint.sh"] ##?????
     environment: 
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -116,8 +119,6 @@ services:
     volumes:
       - ./test.sh:/test.sh
     entrypoint: ["sh", "/test.sh"]
-   # depends_on:
-   #   - nginx
     networks:
       - inceptionnet
 volumes:
