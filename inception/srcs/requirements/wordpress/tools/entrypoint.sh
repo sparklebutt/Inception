@@ -12,7 +12,7 @@ set -e  # Exit immediately if a command exits with a non-zero status
 #debugging statements such as checking the runtime expansion of variables 
 # added lso debggunng statements to each if statement hoping il catch them in log
 
-envsubst < /etc/php/php-fpm.d/www.conf.template > /etc/php/php-fpm.d/www.conf
+envsubst < /etc/php83/php-fpm.d/www.conf.template > /etc/php83/php-fpm.d/www.conf
 
 # Wait for the database to be ready
 until mysqladmin ping -h "${DB_HOST}" --silent; do

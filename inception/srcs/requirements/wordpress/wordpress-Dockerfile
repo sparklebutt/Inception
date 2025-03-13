@@ -21,7 +21,10 @@ RUN apk update && apk add --no-cache \
     mariadb-client
 
 # Copy PHP-FPM configuration template
-COPY php-fpm.conf.template /etc/php/php-fpm.d/www.conf.template
+COPY php-fpm.conf.template /etc/php83/php-fpm.d/www.conf.template
+
+# Set PHP memory limit
+RUN echo "memory_limit = 256M" >> /etc/php83/php.ini
 
 #COPY php-fpm.conf.template /etc/php/php-fpm.d/www.conf
 

@@ -29,6 +29,9 @@ pm.status_path = /status
 ; rlimit_files = 1024
 ; rlimit_core = 0
 
+; increase php memeory limit 
+php_admin_value[memory_limit] = 256M
+
 ; Logging settings
 access.log = /var/log/php-fpm.access.log
 

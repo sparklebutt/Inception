@@ -70,8 +70,11 @@ services:
       - WORDPRESS_DB_USER=${MYSQL_USER}
       - WORDPRESS_DB_PASSWORD=${MYSQL_PASSWORD}
       - WORDPRESS_DB_NAME=${MYSQL_DATABASE}
-      - BOSS_PASS=${BOSS_PASS}
       - WORDPRESS_PORT=${WORDPRESS_PORT}
+      - ADMIN_UNAME=${ADMIN_UNAME}
+      - BOSS_PASS=${BOSS_PASS}
+      - GUEST_UNAME=${GUEST_UNAME}
+      - GUEST_PASS=${GUEST_PASS}
     volumes:
       - ${WORDPRESS_VOLUME_PATH}:/var/www/html
     networks:

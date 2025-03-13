@@ -18,7 +18,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Ensure Nginx configuration is correct and is being used
+# Ensure Nginx configuration is correct and is being used nginx sh?
 docker-compose -f srcs/docker-compose.yml exec nginx cat /etc/nginx/nginx.conf | grep 'server_name'
 if [ $? -ne 0 ]; then
     echo "Test Failed: Nginx configuration is incorrect or not being used"
@@ -27,14 +27,14 @@ fi
 echo "All nginx tests passed successfully."
 
 # Test if WordPress home page is up and running
-curl -s http://nginx:80 | grep 'Welcome to WordPress'
+curl -s http://nginx:443 | grep 'Welcome to WordPress'
 if [ $? -ne 0 ]; then
     echo "Test Failed: WordPress home page not served correctly"
     exit 1
 fi
 
 # Test if WordPress login page is accessible
-curl -s http://nginx:80/wp-login.php | grep 'Log In'
+curl -s http://nginx:443/wp-login.php | grep 'Log In'
 if [ $? -ne 0 ]; then
     echo "Test Failed: WordPress login page not accessible"
     exit 1
