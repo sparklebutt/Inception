@@ -14,7 +14,7 @@ set -e  # Exit immediately if a command exits with a non-zero status
 
 envsubst < /etc/php83/php-fpm.d/www.conf.template > /etc/php83/php-fpm.d/www.conf
 
-# Wait for the database to be ready
+# Wait for the database to be ready commented out for debugging
 until mysqladmin ping -h "${DB_HOST}" --silent; do
   echo "Waiting for database to be ready..."
   sleep 2
@@ -23,6 +23,14 @@ done
 # Check if WordPress is already installed The wp core is-installed command
 # directly checks if WordPress is installed by querying the database, providing a precise and reliable status.
 # creating the users here allows for dynamic user creation , eg differenmt system have different users.
+
+# Test database connection
+echo "Testing database connection..."
+if ! mysql -h"${WORDPRESS_DB_HOST}" -u"${WORDPRESS_DB_USER}" -p"${WORDPRESS_DB_PASSWORD}" -e "USE ${WORDPRESS_DB_NAME};"; then
+  echo "Error: Unable to connect to the database"
+  exit 1
+fi
+echo "Database connection successful."
 
 if ! wp core is-installed --path="/var/www/html"; then
   echo "WordPress is being installed"
