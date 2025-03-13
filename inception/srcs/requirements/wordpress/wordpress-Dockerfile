@@ -6,7 +6,8 @@ FROM alpine:3.20.6
 # Install required packages with specific versions if necessary
 # removed     wordpress may need to add packages. added curl
 RUN apk update && apk add --no-cache \
-    curl \
+    bash \
+	curl \
 	php \
     php-fpm \
     php-mysqli \
@@ -15,6 +16,7 @@ RUN apk update && apk add --no-cache \
     php-gd \
     php-xml \
     php-zip \
+    php-phar \
     mariadb-client
 
 # Copy PHP-FPM configuration template

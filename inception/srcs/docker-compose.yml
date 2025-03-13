@@ -40,7 +40,7 @@ services:
       - ${NGINX_VOLUME_PATH}nginx-logs:/var/log/nginx 
     networks:
       - inceptionnet
-    #restart: unless-stopped
+    restart: unless-stopped
     depends_on:
       - wordpress
     healthcheck:
