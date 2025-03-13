@@ -2,6 +2,10 @@
 #!/bin/sh
 
 set -e  # Exit immediately if a command exits with a non-zero status
+# Source .env file if exists
+if [ -f  ~/inception/srcs/.env ]; then
+  source ~/inception/srcs/.env
+fi
 
 # Wait for the database to be ready
 until mysqladmin ping -h "${DB_HOST}" --silent; do
@@ -23,13 +27,13 @@ if ! wp core is-installed --path="/var/www/html"; then
   fi
 
   # Create WordPress configuration file
-  if ! wp config create --dbname="${MYSQL_DATABASE}" --dbuser="${MYSQL_USER}" --dbpass=${MYSQL_PASSWORD} --dbhost=${DB_HOST} --path=/var/www/html; then
+  if ! wp config create --dbname="${MYSQL_DATABASE}" --dbuser="${MYSQL_USER}" --dbpass="${MYSQL_PASSWORD}" --dbhost="${DB_HOST}" --path=/var/www/html; then
     echo "Error creating wp-config.php"
     exit 1
   fi
 
   # Install WordPress
-  if ! wp core install --url="http://localhost" --title="WordPress Site" --admin_user=${ADMIN_UNAME} --admin_password=${BOSS_PASS} --admin_email="admin@example.com" --skip-email --path=/var/www/html; then
+  if ! wp core install --url="http://localhost" --title="WordPress Site" --admin_user="${ADMIN_UNAME}" --admin_password="${BOSS_PASS}" --admin_email="admin@example.com" --skip-email --path=/var/www/html; then
     echo "Error installing WordPress"
     exit 1
   fi
