@@ -7,6 +7,7 @@ FROM alpine:3.20.6
 # removed     wordpress may need to add packages. added curl
 RUN apk update && apk add --no-cache \
     bash \
+	gettext \
 	curl \
 	php \
     php-fpm \
@@ -20,7 +21,9 @@ RUN apk update && apk add --no-cache \
     mariadb-client
 
 # Copy PHP-FPM configuration template
-COPY php-fpm.conf.template /etc/php/php-fpm.d/www.conf
+COPY php-fpm.conf.template /etc/php/php-fpm.d/www.conf.template
+
+#COPY php-fpm.conf.template /etc/php/php-fpm.d/www.conf
 
 # Create necessary directories
 RUN mkdir -p /run/php

@@ -24,6 +24,10 @@ ps:
 restart:
 	docker-compose -f $(DOCKER_COMPOSE_FILE) restart
 
+# Run Docker Container new and not tested yet
+#run:
+#    docker run --env-file /path/to/your/.env -d --name wordpress-container wordpress
+
 # Run tests if any are defined
 test:
 	docker-compose -f $(DOCKER_COMPOSE_FILE) run --rm test

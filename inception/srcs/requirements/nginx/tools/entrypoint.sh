@@ -5,8 +5,9 @@ envsubst < etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
 
 # Start Nginx
 nginx -g "daemon off;"
+# exec this command
 
-
+# remove comments  
 #!/bin/sh
 # something to look into below
 # Validate environment variables

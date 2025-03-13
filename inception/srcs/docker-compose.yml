@@ -127,3 +127,4 @@ volumes:
 networks:
   inceptionnet:
     driver: bridge
+    name: inceptionnet

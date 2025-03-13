@@ -3,9 +3,16 @@
 
 set -e  # Exit immediately if a command exits with a non-zero status
 # Source .env file if exists
-if [ -f  ~/inception/srcs/.env ]; then
-  source ~/inception/srcs/.env
-fi
+#if [ -f  ~/inception/srcs/.env ]; then
+#  source ~/inception/srcs/.env
+#fi
+
+#####testing stuff added to the vm file
+#
+#debugging statements such as checking the runtime expansion of variables 
+# added lso debggunng statements to each if statement hoping il catch them in log
+
+envsubst < /etc/php/php-fpm.d/www.conf.template > /etc/php/php-fpm.d/www.conf
 
 # Wait for the database to be ready
 until mysqladmin ping -h "${DB_HOST}" --silent; do
@@ -52,3 +59,5 @@ chown -R www-data:www-data /var/www/html
 
 # Start PHP-FPM in the foreground
 exec php-fpm -F
+
+# exec "$@" could be used, we could add CMD ro dockerfile , i see no value here yet 
