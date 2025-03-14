@@ -17,6 +17,11 @@ http {
 					'$status $body_bytes_sent "$http_referer" '
 					'"$http_user_agent" "$http_x_forwarded_for"';
 
+    server {
+        listen 80; # Listen to HTTP connections on port 80
+        return 444; # Reject connection
+    }
+
 	access_log /var/log/nginx/access.log main;
 	sendfile on;
 	keepalive_timeout 65;
@@ -27,13 +32,8 @@ http {
 	# main server block for https
 	server {
 		listen ${SECURE_PORT} ssl;
-		server_name 192.168.32.117;
-		location /test_variables {
-			default_type text/plain;
-			return 200 'fastcgi_script_name: $fastcgi_script_name\n'
-					'document_root: $document_root\n'
-					'full_script_path: $document_root$fastcgi_script_name\n';
-		}
+		 listen [::]:${SECURE_PORT} ssl; #IPv6
+		server_name ${DOMAIN_NAME};
 		ssl_protocols TLSv1.2 TLSv1.3;
 
 		ssl_prefer_server_ciphers on;

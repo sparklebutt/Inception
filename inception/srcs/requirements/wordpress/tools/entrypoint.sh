@@ -2,7 +2,7 @@
 
 set -e
 
-envsubst < /etc/php83/php-fpm.d/www.conf.template > /etc/php83/php-fpm.d/www.conf
+envsubst < /etc/php81/php-fpm.d/www.conf.template > /etc/php81/php-fpm.d/www.conf
 
 echo "Testing database connection..."
 echo "WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}"
@@ -21,7 +21,7 @@ if ! wp core is-installed --path="/var/www/html"; then
   rm -rf /var/www/html/*
 
   # Double-check permissions
-  chown -R www-data:www-data /var/www/html
+  chown -R nginx:nginx /var/www/html
   chmod -R 755 /var/www/html
   
   if ! wp core download --path=/var/www/html; then
@@ -47,6 +47,6 @@ else
   echo "WordPress is already installed."
 fi
 
-chown -R www-data:www-data /var/www/html
+chown -R nginx:nginx /var/www/html
 
 exec php-fpm83 -F

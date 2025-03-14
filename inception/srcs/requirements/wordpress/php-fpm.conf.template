@@ -5,11 +5,11 @@ error_log = /var/log/php-fpm.log
 
 [www]
 ; PHP-FPM pool configuration users could be nginx
-user = www-data
-group = www-data
+user = nginx
+group = nginx
 listen = ${WORDPRESS_PORT}
-listen.owner = www-data
-listen.group = www-data
+listen.owner = nginx
+listen.group = nginx
 listen.mode = 0660
 
 pm = dynamic
