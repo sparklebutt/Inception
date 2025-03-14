@@ -17,7 +17,7 @@ ARG SECURE_PORT
 # Install Nginx and OpenSSL no cache ensurfes latest packages
 # envsubst (via gettext) so i can use .env vars in conf files
 RUN apk update && apk add --no-cache nginx openssl gettext 
-
+RUN apk add --no-cache curl
 # Add non-root user and set permissions if the user does not already exist
 RUN id -u nginx &>/dev/null || adduser -D -g 'www' nginx && chown -R nginx:nginx /var/lib/nginx
 

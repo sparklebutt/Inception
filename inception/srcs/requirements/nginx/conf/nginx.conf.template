@@ -27,8 +27,13 @@ http {
 	# main server block for https
 	server {
 		listen ${SECURE_PORT} ssl;
-		server_name ${DOMAIN_NAME};
-		
+		server_name 192.168.32.117;
+		location /test_variables {
+			default_type text/plain;
+			return 200 'fastcgi_script_name: $fastcgi_script_name\n'
+					'document_root: $document_root\n'
+					'full_script_path: $document_root$fastcgi_script_name\n';
+		}
 		ssl_protocols TLSv1.2 TLSv1.3;
 
 		ssl_prefer_server_ciphers on;

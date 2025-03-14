@@ -8,6 +8,7 @@ ARG WORDPRESS_PORT
 # removed     wordpress may need to add packages. added curl
 RUN apk update && apk add --no-cache \
     bash \
+    curl \
     gettext \
     curl \
     php \
