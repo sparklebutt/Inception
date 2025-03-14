@@ -2,7 +2,7 @@
 
 set -e
 
-envsubst < /etc/php81/php-fpm.d/www.conf.template > /etc/php81/php-fpm.d/www.conf
+envsubst < /etc/php83/php-fpm.d/www.conf.template > /etc/php83/php-fpm.d/www.conf
 
 echo "Testing database connection..."
 echo "WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}"
