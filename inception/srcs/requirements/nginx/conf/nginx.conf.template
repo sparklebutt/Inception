@@ -28,6 +28,7 @@ http {
 		server_name ${DOMAIN_NAME};
 		return 301 https://$server_name$request_uri;
 	}
+
 	# main server block for https
 	server {
 		listen ${SECURE_PORT} ssl;
@@ -35,6 +36,9 @@ http {
 		
 		ssl_protocols TLSv1.2 TLSv1.3;
 
+		ssl_prefer_server_ciphers on;
+		ssl_ciphers HIGH:!aNULL:!MD5;
+		
 		ssl_certificate /etc/nginx/ssl/selfsigned.crt;
 		ssl_certificate_key /etc/nginx/ssl/selfsigned.key;
 
