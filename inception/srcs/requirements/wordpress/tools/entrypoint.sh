@@ -49,4 +49,4 @@ fi
 
 chown -R www-data:www-data /var/www/html
 
-exec php-fpm -F
+exec php83-fpm -F
