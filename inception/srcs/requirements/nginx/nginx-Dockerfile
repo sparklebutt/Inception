@@ -42,6 +42,8 @@ RUN chmod 600 /etc/nginx/ssl/selfsigned.key
 # Copy custom Nginx configuration template file
 COPY conf/nginx.conf.template /etc/nginx/nginx.conf.template
 RUN chmod +x /etc/nginx/nginx.conf.template
+
+RUN echo 'fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;' >> /etc/nginx/fastcgi_params
 # do i need for conf also?
 # Expose port 443 for HTTPS
 EXPOSE ${SECURE_PORT}
