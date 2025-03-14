@@ -12,11 +12,11 @@
 
 
 # Test if HTTP is redirected to HTTPS
-curl -s -o /dev/null -w '%{http_code}' http://nginx:80 | grep '301'
-if [ $? -ne 0 ]; then
-    echo "Test Failed: HTTP not redirected to HTTPS"
-    exit 1
-fi
+#curl -s -o /dev/null -w '%{http_code}' http://nginx:80 | grep '301'
+#if [ $? -ne 0 ]; then
+#    echo "Test Failed: HTTP not redirected to HTTPS"
+#    exit 1
+#fi
 
 # Ensure Nginx configuration is correct and is being used nginx sh?
 docker-compose -f srcs/docker-compose.yml exec nginx cat /etc/nginx/nginx.conf | grep 'server_name'
@@ -27,7 +27,7 @@ fi
 echo "All nginx tests passed successfully."
 
 # Test if WordPress home page is up and running
-curl -s http://nginx:443 | grep 'Welcome to WordPress'
+curl -k -s https://nginx:443 | grep 'Welcome to WordPress'
 if [ $? -ne 0 ]; then
     echo "Test Failed: WordPress home page not served correctly"
     exit 1

@@ -36,7 +36,7 @@ RUN mkdir -p /run/php
 RUN adduser -S www-data -G www-data
 
 # Create a symlink for PHP
-RUN ln -s /usr/bin/php /usr/bin/php83
+#RUN ln -s /usr/bin/php /usr/bin/php83
 
 # Set working directory
 WORKDIR /var/www/html
