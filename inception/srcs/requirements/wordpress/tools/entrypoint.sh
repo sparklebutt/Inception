@@ -5,10 +5,13 @@ set -e
 envsubst < /etc/php83/php-fpm.d/www.conf.template > /etc/php83/php-fpm.d/www.conf
 
 echo "Testing database connection..."
-if ! mysql -h"${WORDPRESS_DB_HOST}" -u"${WORDPRESS_DB_USER}" -p"${WORDPRESS_DB_PASSWORD}" -e "USE ${WORDPRESS_DB_NAME};"; then
-  echo "Error: Unable to connect to the database"
-  exit 1
-fi
+echo "WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}"
+
+until mysql -h"${WORDPRESS_DB_HOST}" -u"${WORDPRESS_DB_USER}" -p"${WORDPRESS_DB_PASSWORD}" -e "USE ${WORDPRESS_DB_NAME};"; do
+  echo "waiting for database connection .....!"
+  sleep 10
+done
+
 echo "Database connection successful."
 
 if ! wp core is-installed --path="/var/www/html"; then

@@ -3,7 +3,7 @@
 set -e  # Exit immediately if a command exits with a non-zero status
 
 # Substitute environment variables in mariadb.cnf.template
-envsubst < etc/mysql/mariadb.cnf.template > /etc/mysql/my.cnf
+envsubst < etc/mysql/mariadb.cnf.template > /etc/my.cnf
 
 
 
