@@ -99,6 +99,7 @@ services:
       args:
         BASE_VERSION: ${BASE_VERSION}
         WORDPRESS_PORT: ${WORDPRESS_PORT}
+        MARIADB_PORT: ${MARIADB_PORT}
     #ports: "${MARIADB_PORT} : ${MARIADB_PORT}"
     entrypoint: ["/entrypoint.sh"] ##?????
     environment: 
