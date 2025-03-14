@@ -21,6 +21,13 @@ until mysqladmin ping --silent; do
   sleep 2
 done
 
-# Keep the MariaDB server running in the foreground exce?
+# Create the database and user, and grant privileges this goes into a init-db.sh
+mysql -u root <<-EOSQL
+  CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
+  CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+  GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
+  FLUSH PRIVILEGES;
+EOSQL
+
 #exec mysqld_safe
 wait $pid

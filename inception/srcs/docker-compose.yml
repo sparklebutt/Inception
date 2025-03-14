@@ -62,9 +62,8 @@ services:
       args:
         BASE_VERSION: ${BASE_VERSION}
         WORDPRESS_PORT: ${WORDPRESS_PORT}
-    entrypoint: ["/entrypoint.sh"] ##?????
+    entrypoint: ["/entrypoint.sh"]
     #ports:
-    #  - "${WORDPRESS_PORT}:${WORDPRESS_PORT}"
     environment:
       - WORDPRESS_DB_HOST=${DB_HOST}
       - WORDPRESS_DB_USER=${MYSQL_USER}
@@ -100,8 +99,7 @@ services:
         BASE_VERSION: ${BASE_VERSION}
         WORDPRESS_PORT: ${WORDPRESS_PORT}
         MARIADB_PORT: ${MARIADB_PORT}
-    #ports: "${MARIADB_PORT} : ${MARIADB_PORT}"
-    entrypoint: ["/entrypoint.sh"] ##?????
+    entrypoint: ["/entrypoint.sh"]
     environment: 
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -112,7 +110,7 @@ services:
       - ${DB_VOLUME_PATH}:/var/lib/mysql
     networks:
       - inceptionnet
-    restart: unless-stopped #for now
+    restart: unless-stopped
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-u", "root", "--password=${MYSQL_ROOT_PASSWORD}"]
       interval: 30s

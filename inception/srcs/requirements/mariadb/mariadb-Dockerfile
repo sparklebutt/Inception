@@ -31,6 +31,10 @@ COPY mariadb.cnf.template /etc/mysql/mariadb.cnf.template
 COPY tools/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+# Copy the init-db.sh script to the correct location
+# COPY init-db.sh /docker-entrypoint-initdb.d/
+# RUN chmod +x /docker-entrypoint-initdb.d/init-db.sh
+
 EXPOSE ${MARIADB_PORT}
 # Use the entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
