@@ -17,6 +17,13 @@ echo "Database connection successful."
 if ! wp core is-installed --path="/var/www/html"; then
   echo "WordPress is being installed"
 
+  # Clean up any existing WordPress files
+  rm -rf /var/www/html/*
+
+  # Double-check permissions
+  chown -R www-data:www-data /var/www/html
+  chmod -R 755 /var/www/html
+  
   if ! wp core download --path=/var/www/html; then
     echo "Error downloading WordPress"
     exit 1
