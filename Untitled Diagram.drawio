@@ -325,7 +325,7 @@
         <mxCell id="Z3fMapQdSAwZX1owhjYI-60" value="&lt;div&gt;if you need to change the oldhost key entry&amp;nbsp; for vm&lt;/div&gt;ssh-keygen -R vm-ip&lt;div&gt;then ssh root@vm-ip and continue&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="VuhiG2OMYxqmFF7oU0-H-6" vertex="1">
           <mxGeometry y="486" width="750" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="Z3fMapQdSAwZX1owhjYI-67" value="scp -rP 2222 /home/user/testing/inception root@localhost:~/" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="VuhiG2OMYxqmFF7oU0-H-6" vertex="1">
+        <mxCell id="Z3fMapQdSAwZX1owhjYI-67" value="scp -rP 2222 /home/user/testing/inception root@192.168.32.91:~/" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="VuhiG2OMYxqmFF7oU0-H-6" vertex="1">
           <mxGeometry y="546" width="750" height="30" as="geometry" />
         </mxCell>
         <mxCell id="VuhiG2OMYxqmFF7oU0-H-26" value="alpine is a better choice because its containers are smaller, this allows for faster builds and transfer times.&lt;div&gt;its more lightweight and simple.&lt;/div&gt;" style="shape=loopLimit;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">

@@ -34,7 +34,7 @@ if ! wp core is-installed --path="/var/www/html"; then
     exit 1
   fi
 
-  if ! wp core install --url="http://localhost" --title="WordPress Site" --admin_user="${ADMIN_UNAME}" --admin_password="${BOSS_PASS}" --admin_email="admin@example.com" --skip-email --path=/var/www/html; then
+  if ! wp core install --url="http://192.168.32.91" --title="WordPress Site" --admin_user="${ADMIN_UNAME}" --admin_password="${BOSS_PASS}" --admin_email="admin@example.com" --skip-email --path=/var/www/html; then
     echo "Error installing WordPress"
     exit 1
   fi

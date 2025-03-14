@@ -27,7 +27,7 @@ restart:
 test:
     docker-compose -f $(DOCKER_COMPOSE_FILE) run --rm test
 #assumin that we have a application that runs a web server returning "hello, World!"
-    curl -s http://localhost | grep "Hello, World!"
+    curl -s http://192.168.32.91 | grep "Hello, World!"
 
 #make logs to view logs of the running service in real time
 logs:
