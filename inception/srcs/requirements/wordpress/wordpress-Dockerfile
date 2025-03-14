@@ -7,6 +7,9 @@ ARG WORDPRESS_PORT
 # Install required packages with specific versions if necessary
 # removed     wordpress may need to add packages. added curl
 
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
+
 RUN apk update && apk add --no-cache \
 	gettext \
 	php81 \
